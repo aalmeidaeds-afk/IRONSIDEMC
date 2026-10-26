@@ -1,0 +1,151 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
+  <defs>
+    <!-- Gold Gradients -->
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a" />
+      <stop offset="50%" stop-color="#eab308" />
+      <stop offset="100%" stop-color="#a16207" />
+    </linearGradient>
+    <linearGradient id="goldTrim" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ca8a04" />
+      <stop offset="50%" stop-color="#fef08a" />
+      <stop offset="100%" stop-color="#854d0e" />
+    </linearGradient>
+    <radialGradient id="headlightGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="40%" stop-color="#fef08a" />
+      <stop offset="80%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#b45309" />
+    </radialGradient>
+    <linearGradient id="roadGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#27272a" />
+      <stop offset="50%" stop-color="#18181b" />
+      <stop offset="100%" stop-color="#09090b" />
+    </linearGradient>
+
+    <!-- Path for Top Curved Text "Iron Side" -->
+    <path id="topCurve" d="M 80,180 A 210,210 0 0,1 420,180" fill="none" />
+    <!-- Path for Bottom Curved Text "Os melhores são de ferro" -->
+    <path id="bottomCurve" d="M 90,320 A 210,210 0 0,0 410,320" fill="none" />
+  </defs>
+
+  <rect width="500" height="500" fill="#09090b" rx="24" />
+
+  <!-- TOP TEXT: Iron Side -->
+  <text font-family="'Cinzel', 'Space Grotesk', serif" font-weight="900" font-size="44" fill="#f4f4f5" letter-spacing="8" text-anchor="middle">
+    <textPath href="#topCurve" startOffset="50%">
+      IRON SIDE
+    </textPath>
+  </text>
+
+  <!-- BOTTOM TEXT: Os melhores são de ferro -->
+  <text font-family="'Cinzel', 'Space Grotesk', serif" font-weight="800" font-size="24" fill="#eab308" letter-spacing="4" text-anchor="middle">
+    <textPath href="#bottomCurve" startOffset="50%">
+      OS MELHORES SÃO DE FERRO
+    </textPath>
+  </text>
+
+  <!-- CENTRAL DIAMOND (LOZENGE) -->
+  <g transform="translate(250,250)">
+    <!-- Outer Gold Diamond border -->
+    <polygon points="0,-155 155,0 0,155 -155,0" fill="#09090b" stroke="url(#goldGrad)" stroke-width="7" stroke-linejoin="round" />
+    <polygon points="0,-146 146,0 0,146 -146,0" fill="#121214" stroke="#a16207" stroke-width="2" stroke-linejoin="round" />
+
+    <!-- HIGHWAY PERSPECTIVE (Road reaching towards top vertex) -->
+    <polygon points="-22,10 22,10 4,-140 -4,-140" fill="url(#roadGrad)" stroke="#3f3f46" stroke-width="1" />
+    <!-- Road dashed yellow center line -->
+    <line x1="0" y1="8" x2="0" y2="-136" stroke="#eab308" stroke-width="2" stroke-dasharray="8,6" />
+    <!-- Road side barriers/lights -->
+    <line x1="-20" y1="8" x2="-4" y2="-138" stroke="#71717a" stroke-width="1.5" />
+    <line x1="20" y1="8" x2="4" y2="-138" stroke="#71717a" stroke-width="1.5" />
+
+    <!-- LEFT SIDE: BRAZIL FLAG & 'Road M' -->
+    <g transform="translate(-105, -28)">
+      <!-- Brazil Flag -->
+      <rect x="0" y="0" width="34" height="22" rx="2" fill="#15803d" />
+      <polygon points="17,3 31,11 17,19 3,11" fill="#facc15" />
+      <circle cx="17" cy="11" r="5" fill="#1d4ed8" />
+      <path d="M 13,11 A 5,5 0 0,1 21,11" stroke="#ffffff" stroke-width="1" fill="none" />
+      <!-- Text: Road M -->
+      <text x="17" y="36" font-family="'Space Grotesk', sans-serif" font-weight="900" font-size="12" fill="#f4f4f5" text-anchor="middle" letter-spacing="1">
+        Road
+      </text>
+      <text x="17" y="52" font-family="'Space Grotesk', sans-serif" font-weight="900" font-size="15" fill="#eab308" text-anchor="middle">
+        M
+      </text>
+    </g>
+
+    <!-- RIGHT SIDE: SÃO PAULO FLAG & 'rider C' -->
+    <g transform="translate(71, -28)">
+      <!-- São Paulo Flag (13 stripes black/white with red canton) -->
+      <rect x="0" y="0" width="34" height="22" rx="2" fill="#ffffff" />
+      <line x1="0" y1="2" x2="34" y2="2" stroke="#000000" stroke-width="1.8" />
+      <line x1="0" y1="5.5" x2="34" y2="5.5" stroke="#000000" stroke-width="1.8" />
+      <line x1="0" y1="9" x2="34" y2="9" stroke="#000000" stroke-width="1.8" />
+      <line x1="0" y1="12.5" x2="34" y2="12.5" stroke="#000000" stroke-width="1.8" />
+      <line x1="0" y1="16" x2="34" y2="16" stroke="#000000" stroke-width="1.8" />
+      <line x1="0" y1="19.5" x2="34" y2="19.5" stroke="#000000" stroke-width="1.8" />
+      <!-- Red canton on top left of flag -->
+      <rect x="0" y="0" width="14" height="10" fill="#dc2626" />
+      <circle cx="7" cy="5" r="3" fill="#ffffff" />
+      <!-- Text: rider C -->
+      <text x="17" y="36" font-family="'Space Grotesk', sans-serif" font-weight="900" font-size="12" fill="#f4f4f5" text-anchor="middle" letter-spacing="1">
+        rider
+      </text>
+      <text x="17" y="52" font-family="'Space Grotesk', sans-serif" font-weight="900" font-size="15" fill="#eab308" text-anchor="middle">
+        C
+      </text>
+    </g>
+
+    <!-- MOTORCYCLE HANDLEBARS (Custom Ape / Cruiser Bars) -->
+    <g stroke="url(#goldGrad)" stroke-linecap="round" fill="none">
+      <!-- Crossbar and grip curves -->
+      <path d="M -85,-28 C -70,-35 -40,-35 -20,-10 L 0,0 L 20,-10 C 40,-35 70,-35 85,-28" stroke-width="6" />
+      <path d="M -85,-28 L -92,-24" stroke-width="8" stroke="#ca8a04" />
+      <path d="M 85,-28 L 92,-24" stroke-width="8" stroke="#ca8a04" />
+      <!-- Rearview Mirrors -->
+      <circle cx="-80" cy="-45" r="9" fill="#09090b" stroke="url(#goldGrad)" stroke-width="3" />
+      <line x1="-78" y1="-36" x2="-75" y2="-28" stroke-width="3" />
+      <circle cx="80" cy="-45" r="9" fill="#09090b" stroke="url(#goldGrad)" stroke-width="3" />
+      <line x1="78" y1="-36" x2="75" y2="-28" stroke-width="3" />
+    </g>
+
+    <!-- GOLDEN EAGLE WINGS FLANKING THE SKULL -->
+    <g fill="url(#goldGrad)" stroke="#78350f" stroke-width="1">
+      <!-- Left Wing Feathers -->
+      <path d="M -15,10 C -45,10 -75,25 -65,55 C -60,65 -50,75 -35,82 C -45,72 -52,58 -48,45 C -44,35 -30,25 -15,22 Z" />
+      <path d="M -15,25 C -40,28 -60,42 -52,65 C -48,74 -38,82 -25,88 C -35,80 -42,68 -38,58 C -35,48 -25,38 -15,35 Z" />
+      <path d="M -15,38 C -32,45 -48,58 -40,78 C -35,86 -25,92 -15,95 C -25,88 -30,78 -26,68 C -22,58 -18,48 -15,45 Z" />
+
+      <!-- Right Wing Feathers -->
+      <path d="M 15,10 C 45,10 75,25 65,55 C 60,65 50,75 35,82 C 45,72 52,58 48,45 C 44,35 30,25 15,22 Z" />
+      <path d="M 15,25 C 40,28 60,42 52,65 C 48,74 38,82 25,88 C 35,80 42,68 38,58 C 35,48 25,38 15,35 Z" />
+      <path d="M 15,38 C 32,45 48,58 40,78 C 35,86 25,92 15,95 C 25,88 30,78 26,68 C 22,58 18,48 15,45 Z" />
+    </g>
+
+    <!-- GLOWING MOTORCYCLE HEADLIGHT (Central Amber Lamp) -->
+    <circle cx="0" cy="-2" r="24" fill="url(#headlightGlow)" stroke="#ca8a04" stroke-width="4" filter="drop-shadow(0 0 12px rgba(245,158,11,0.8))" />
+    <circle cx="0" cy="-2" r="14" fill="#ffffff" opacity="0.9" />
+
+    <!-- BIKER SKULL -->
+    <g transform="translate(0, 72)">
+      <!-- Cranium -->
+      <path d="M -26,-22 C -26,-40 26,-40 26,-22 C 26,-12 24,-5 18,2 C 16,8 14,14 12,20 L -12,20 C -14,14 -16,8 -18,2 C -24,-5 -26,-12 -26,-22 Z" fill="#ffffff" stroke="#18181b" stroke-width="2" />
+      <!-- Cheekbones contour -->
+      <path d="M -22,-6 C -28,2 -26,12 -18,16" stroke="#27272a" stroke-width="2" fill="none" />
+      <path d="M 22,-6 C 28,2 26,12 18,16" stroke="#27272a" stroke-width="2" fill="none" />
+      <!-- Eye Sockets (Angled mean look) -->
+      <path d="M -18,-18 C -16,-24 -6,-20 -7,-14 C -8,-9 -16,-10 -18,-18 Z" fill="#09090b" />
+      <path d="M 18,-18 C 16,-24 6,-20 7,-14 C 8,-9 16,-10 18,-18 Z" fill="#09090b" />
+      <!-- Nasal Cavity (Inverted heart / spade) -->
+      <path d="M 0,-10 L -4,-3 C -4,-1 0,0 0,0 C 0,0 4,-1 4,-3 Z" fill="#09090b" />
+      <!-- Teeth / Maxilla -->
+      <rect x="-10" y="16" width="20" height="12" rx="2" fill="#ffffff" stroke="#18181b" stroke-width="1.5" />
+      <line x1="-6" y1="16" x2="-6" y2="28" stroke="#18181b" stroke-width="1.5" />
+      <line x1="-2" y1="16" x2="-2" y2="28" stroke="#18181b" stroke-width="1.5" />
+      <line x1="2" y1="16" x2="2" y2="28" stroke="#18181b" stroke-width="1.5" />
+      <line x1="6" y1="16" x2="6" y2="28" stroke="#18181b" stroke-width="1.5" />
+      <line x1="-10" y1="22" x2="10" y2="22" stroke="#18181b" stroke-width="1" />
+    </g>
+  </g>
+</svg>

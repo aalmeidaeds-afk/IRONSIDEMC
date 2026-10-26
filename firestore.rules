@@ -1,0 +1,224 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Global Safety Net: default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isBootstrappedAdmin() {
+      return isSignedIn() && request.auth.token.email == "dinastiasystem@gmail.com";
+    }
+
+    function getUserData() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+
+    function isAdmin() {
+      return isBootstrappedAdmin() || (
+        isSignedIn() &&
+        exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+        getUserData().role == 'administrador'
+      );
+    }
+
+    function isDiretoria() {
+      return isAdmin() || (
+        isSignedIn() &&
+        exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+        getUserData().role == 'diretoria'
+      );
+    }
+
+    function isOwner(uid) {
+      return isSignedIn() && request.auth.uid == uid;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() > 0 && id.size() <= 128;
+    }
+
+    // 0. Connection Test
+    match /test/{docId} {
+      allow read: if true;
+    }
+
+    // 1. Users collection: Previne auto-elevação de privilégio para administrador
+    match /users/{userId} {
+      allow read: if isSignedIn() && (isOwner(userId) || isDiretoria());
+      allow create: if isSignedIn() && (
+        (isOwner(userId) && request.resource.data.role == 'associado' && request.resource.data.status in ['ativo', 'pendente', 'em_analise']) ||
+        isAdmin()
+      );
+      allow update: if isSignedIn() && (
+        isAdmin() ||
+        (isOwner(userId) && !request.resource.data.diff(resource.data).affectedKeys().hasAny(['role', 'status']))
+      );
+      allow delete: if isAdmin();
+    }
+
+    // 2. Associados collection
+    match /associados/{associadoId} {
+      allow read: if isSignedIn() && (
+        isDiretoria() ||
+        resource.data.uid == request.auth.uid ||
+        resource.data.id == request.auth.uid
+      );
+      allow create: if isSignedIn() && (
+        request.resource.data.uid == request.auth.uid || isAdmin()
+      );
+      allow update: if isSignedIn() && (
+        isAdmin() ||
+        isDiretoria() ||
+        (
+          (resource.data.uid == request.auth.uid || resource.data.id == request.auth.uid) &&
+          !request.resource.data.diff(resource.data).affectedKeys().hasAny(['status', 'numeroAssociado', 'cargo', 'regional'])
+        )
+      );
+      allow delete: if isAdmin();
+    }
+
+    // 3. Veículos
+    match /veiculos/{veiculoId} {
+      allow read: if isSignedIn() && (
+        isDiretoria() ||
+        resource.data.associadoId == request.auth.uid ||
+        resource.data.associadoUid == request.auth.uid
+      );
+      allow create: if isSignedIn() && (
+        request.resource.data.associadoId == request.auth.uid ||
+        request.resource.data.associadoUid == request.auth.uid ||
+        isAdmin()
+      );
+      allow update, delete: if isSignedIn() && (
+        isAdmin() ||
+        resource.data.associadoId == request.auth.uid ||
+        resource.data.associadoUid == request.auth.uid
+      );
+    }
+
+    // 4. Manutenções
+    match /manutencoes/{manutencaoId} {
+      allow read: if isSignedIn() && (
+        isDiretoria() ||
+        resource.data.associadoId == request.auth.uid
+      );
+      allow create: if isSignedIn() && (
+        request.resource.data.associadoId == request.auth.uid ||
+        isAdmin()
+      );
+      allow update, delete: if isSignedIn() && (
+        isAdmin() ||
+        resource.data.associadoId == request.auth.uid
+      );
+    }
+
+    // 5. Abastecimentos
+    match /abastecimentos/{abastecimentoId} {
+      allow read: if isSignedIn() && (
+        isDiretoria() ||
+        resource.data.associadoId == request.auth.uid
+      );
+      allow create: if isSignedIn() && (
+        request.resource.data.associadoId == request.auth.uid ||
+        isAdmin()
+      );
+      allow update, delete: if isSignedIn() && (
+        isAdmin() ||
+        resource.data.associadoId == request.auth.uid
+      );
+    }
+
+    // 6. Eventos (Agenda pública do moto clube)
+    match /eventos/{eventoId} {
+      allow read: if true;
+      allow create, delete: if isDiretoria();
+      allow update: if isDiretoria() || (
+        isSignedIn() &&
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['inscritos', 'participantesCount', 'presencas', 'galeria'])
+      );
+    }
+
+    // 7. Comunicados (Mural oficial público do moto clube)
+    match /comunicados/{comunicadoId} {
+      allow read: if true;
+      allow create, update, delete: if isDiretoria();
+    }
+
+    // 8. Mensalidades
+    match /mensalidades/{mensalidadeId} {
+      allow read: if isSignedIn() && (
+        isDiretoria() ||
+        resource.data.associadoId == request.auth.uid
+      );
+      allow create, update, delete: if isDiretoria() || isAdmin();
+    }
+
+    // 9. Prestadores de Serviços / SOS (Rede credenciada e socorro público)
+    match /prestadores_servicos/{prestadorId} {
+      allow read: if true;
+      allow create, update, delete: if isDiretoria();
+    }
+
+    // 10. Configurações (Apenas Administrador e Diretoria podem alterar parâmetros e chave PIX)
+    match /configuracoes/{configId} {
+      allow read: if true;
+      allow write: if isAdmin() || isDiretoria();
+    }
+
+    // 11. Auditoria (Garante autoria e imutabilidade dos registros de segurança)
+    match /auditoria/{auditoriaId} {
+      allow read: if isAdmin() || isDiretoria();
+      allow create: if isSignedIn() && (
+        request.resource.data.autorUid == request.auth.uid || isAdmin() || isDiretoria()
+      );
+      allow update: if false; // Imutável para atualizações
+      allow delete: if isAdmin(); // Exclusivo Administrador para expurgo e manutenção
+    }
+
+    // 12. Credenciais Diretoria (Acesso protegido contra leitura pública e escrita indevida)
+    match /credenciais_diretoria/{credId} {
+      allow read, write: if isDiretoria() || isAdmin();
+    }
+
+    // 13. Campanhas e Doações (Ação social pública do moto clube)
+    match /campanhas/{campanhaId} {
+      allow read: if true;
+      allow create, delete: if isDiretoria();
+      allow update: if isDiretoria() || (
+        isSignedIn() &&
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['arrecadadoValor', 'arrecadadoItensCount', 'doacoes'])
+      );
+    }
+
+    // 14. Amigos e Moto Clubes Parceiros
+    match /amigos_mc/{amigoId} {
+      allow read: if true;
+      allow create, update, delete: if isDiretoria() || isAdmin();
+    }
+
+    // 15. Notícias e Dicas Motociclísticas
+    match /noticias_motos/{noticiaId} {
+      allow read: if true;
+      allow create, update, delete: if isDiretoria() || isAdmin();
+    }
+
+    // 16. Cadastro Institucional (Ata, Estatuto, Diretoria Legal e Contas Bancárias restritas a usuários autenticados)
+    match /cadastro_institucional/{docId} {
+      allow read: if isSignedIn();
+      allow write: if isDiretoria() || isAdmin();
+    }
+
+    // 17. Extrato Bancário e Financeiro (Auditoria e Conciliações)
+    match /extrato_bancario/{docId} {
+      allow read: if isSignedIn() && (isDiretoria() || isAdmin());
+      allow write: if isDiretoria() || isAdmin();
+    }
+  }
+}

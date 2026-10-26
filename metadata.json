@@ -1,0 +1,6 @@
+{
+  "name": "Gestão Moto Clube - Sistema Integrado",
+  "description": "Sistema completo para gestão de moto clube com perfis de Administrador, Diretoria e Associado, carteirinha digital, veículos, mensalidades, eventos e segurança integrada.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,6 @@
+{
+  "summary":  "Documentação completa e detalhada da arquitetura e implementação do Reset Geral do Banco de Dados para início das operações oficiais do Iron Side Road Rider M.C., com fluxo de confirmação em 2 etapas, dupla validação com frase RESET GERAL e senha mascarada, rotina de backup preventivo automático em JSON, exclusão atômica em nuvem e local, bloqueio definitivo de re-injeção de dados de exemplo e preservação estrita de identidade visual, acessos de Administrador e Diretor e estrutura técnica.",
+  "updatedAt":  "2026-10-26T21:34:18.825250955Z",
+  "requestFeedback":  true,
+  "userFacing":  true
+}

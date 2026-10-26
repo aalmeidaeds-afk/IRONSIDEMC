@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "br.com.ironsidemc.app",
+      "sha256_cert_fingerprints": [
+        "14:6D:E9:D6:0F:86:79:86:E6:44:24:B4:49:F7:18:A8:B4:E6:61:A2:43:21:65:B2:91:0C:5A:F3:37:37:A2:8E"
+      ]
+    }
+  }
+]

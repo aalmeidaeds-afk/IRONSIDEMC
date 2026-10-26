@@ -1,0 +1,66 @@
+{
+  "packageId": "br.com.ironsidemc.app",
+  "host": "seumotoclube.com.br",
+  "name": "Iron Side Road Rider M.C.",
+  "launcherName": "Iron Side",
+  "themeColor": "#09090B",
+  "navigationColor": "#09090B",
+  "navigationColorDark": "#09090B",
+  "navigationDividerColor": "#F59E0B",
+  "navigationDividerColorDark": "#F59E0B",
+  "backgroundColor": "#09090B",
+  "enableNotifications": true,
+  "startUrl": "/",
+  "iconUrl": "https://seumotoclube.com.br/pwa-512x512.png",
+  "maskableIconUrl": "https://seumotoclube.com.br/pwa-maskable-512x512.png",
+  "splashScreenFadeOutDuration": 300,
+  "signingKey": {
+    "path": "./android.keystore",
+    "alias": "android"
+  },
+  "appVersionName": "1.2.1",
+  "appVersionCode": 1,
+  "shortcuts": [
+    {
+      "name": "Carteirinha Digital",
+      "shortName": "Carteirinha",
+      "url": "/?tab=carteirinha",
+      "icon": "https://seumotoclube.com.br/pwa-192x192.png"
+    },
+    {
+      "name": "Mensalidades & PIX",
+      "shortName": "Mensalidades",
+      "url": "/?tab=mensalidades",
+      "icon": "https://seumotoclube.com.br/pwa-192x192.png"
+    },
+    {
+      "name": "Frota do Clube",
+      "shortName": "Frota",
+      "url": "/?tab=veiculos",
+      "icon": "https://seumotoclube.com.br/pwa-192x192.png"
+    },
+    {
+      "name": "Emergência SOS Estrada",
+      "shortName": "SOS",
+      "url": "/?tab=sos",
+      "icon": "https://seumotoclube.com.br/pwa-192x192.png"
+    }
+  ],
+  "generatorApp": "bubblewrap-cli",
+  "webManifestUrl": "https://seumotoclube.com.br/manifest.webmanifest",
+  "fallbackType": "customtabs",
+  "features": {
+    "locationDelegation": {
+      "enabled": true
+    },
+    "playBilling": {
+      "enabled": false
+    }
+  },
+  "alphaDependencies": {
+    "enabled": false
+  },
+  "enableSiteSettingsShortcut": true,
+  "isChromeOSOnly": false,
+  "orientation": "portrait"
+}

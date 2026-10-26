@@ -1,0 +1,12 @@
+{
+  "version": "1.2.2",
+  "buildDate": "2026-10-22T00:30:00.000Z",
+  "buildNumber": 14,
+  "changelog": [
+    "Painel de Diagnóstico do Sistema & Trilha de Auditoria Técnica no Módulo 12",
+    "Botão de troca rápida de logotipo com suporte a arquivos do PC (Windows) e Galeria do Celular",
+    "Retorno instantâneo para tela de login ao clicar no logotipo ou brasão no cabeçalho",
+    "Geração de relatório técnico oficial de auditoria e correções em PDF",
+    "Correção no mecanismo de detecção de versão PWA para ocultar aviso após atualizar"
+  ]
+}

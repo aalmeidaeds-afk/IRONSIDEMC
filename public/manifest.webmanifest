@@ -1,0 +1,64 @@
+{
+  "id": "/",
+  "name": "Iron Side Road Rider M.C.",
+  "short_name": "Iron Side",
+  "description": "Sistema oficial de gestão, carteirinha digital, frota e estrada do Iron Side Road Rider M.C.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#09090b",
+  "background_color": "#09090b",
+  "lang": "pt-BR",
+  "categories": ["lifestyle", "sports", "utilities", "productivity"],
+  "icons": [
+    {
+      "src": "/pwa-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa-maskable-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Carteirinha Digital",
+      "short_name": "Carteirinha",
+      "description": "Visualizar documento de identificação oficial do associado",
+      "url": "/?tab=carteirinha",
+      "icons": [{ "src": "/pwa-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Mensalidades & PIX",
+      "short_name": "Mensalidades",
+      "description": "Consultar mensalidades e efetuar pagamentos oficiais via PIX",
+      "url": "/?tab=mensalidades",
+      "icons": [{ "src": "/pwa-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Frota do Clube",
+      "short_name": "Frota",
+      "description": "Consultar motocicletas cadastradas e manutenções",
+      "url": "/?tab=veiculos",
+      "icons": [{ "src": "/pwa-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Emergência SOS Estrada",
+      "short_name": "SOS",
+      "description": "Acesso rápido a dados médicos, tipo sanguíneo e contatos de emergência",
+      "url": "/?tab=sos",
+      "icons": [{ "src": "/pwa-192x192.png", "sizes": "192x192" }]
+    }
+  ]
+}

@@ -1,0 +1,338 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Perfil de acesso do usuário no sistema",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128 },
+        "email": { "type": "string", "maxLength": 150 },
+        "nome": { "type": "string", "maxLength": 100 },
+        "role": { "type": "string", "enum": ["administrador", "diretoria", "associado"] },
+        "status": { "type": "string", "enum": ["ativo", "pendente", "suspenso", "inativo"] },
+        "associadoId": { "type": "string", "maxLength": 128 },
+        "createdAt": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["uid", "email", "role", "status"]
+    },
+    "Associado": {
+      "title": "Associado",
+      "description": "Ficha cadastral completa do associado do Moto Clube",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "uid": { "type": "string", "maxLength": 128 },
+        "numeroAssociado": { "type": "string", "maxLength": 30 },
+        "nome": { "type": "string", "maxLength": 100 },
+        "nomeGuerra": { "type": "string", "maxLength": 50 },
+        "cpf": { "type": "string", "maxLength": 20 },
+        "rg": { "type": "string", "maxLength": 20 },
+        "dataNascimento": { "type": "string", "maxLength": 20 },
+        "tipoSanguineo": { "type": "string", "maxLength": 10 },
+        "email": { "type": "string", "maxLength": 150 },
+        "telefone": { "type": "string", "maxLength": 30 },
+        "whatsapp": { "type": "string", "maxLength": 30 },
+        "cep": { "type": "string", "maxLength": 15 },
+        "logradouro": { "type": "string", "maxLength": 100 },
+        "numero": { "type": "string", "maxLength": 20 },
+        "complemento": { "type": "string", "maxLength": 50 },
+        "bairro": { "type": "string", "maxLength": 50 },
+        "cidade": { "type": "string", "maxLength": 50 },
+        "estado": { "type": "string", "maxLength": 10 },
+        "cnhNumero": { "type": "string", "maxLength": 30 },
+        "cnhCategoria": { "type": "string", "maxLength": 10 },
+        "cnhValidade": { "type": "string", "maxLength": 20 },
+        "regional": { "type": "string", "maxLength": 50 },
+        "cargo": { "type": "string", "maxLength": 50 },
+        "status": { "type": "string", "enum": ["pendente", "em_analise", "aprovado", "ativo", "inativo", "suspenso", "rejeitado", "desligado"] },
+        "fotoUrl": { "type": "string", "maxLength": 500 },
+        "dataAssociacao": { "type": "string", "maxLength": 20 },
+        "dataFiliacao": { "type": "string", "maxLength": 30 },
+        "aprovadoPorDiretoria": { "type": "string", "maxLength": 100 },
+        "numeroAtaFiliacao": { "type": "string", "maxLength": 50 },
+        "dataDesligamento": { "type": "string", "maxLength": 30 },
+        "motivoDesligamento": { "type": "string", "maxLength": 3500 },
+        "desligadoPor": { "type": "string", "maxLength": 100 },
+        "cpfBloqueado": { "type": "string", "maxLength": 20 },
+        "observacoes": { "type": "string", "maxLength": 500 },
+        "aprovadoPor": { "type": "string", "maxLength": 100 },
+        "aprovadoEm": { "type": "string", "maxLength": 50 },
+        "createdAt": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["nome", "email", "status"]
+    },
+    "Veiculo": {
+      "title": "Veiculo",
+      "description": "Veículo ou moto cadastrada pelo associado",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "associadoId": { "type": "string", "maxLength": 128 },
+        "tipo": { "type": "string", "enum": ["moto", "carro", "outro"] },
+        "marca": { "type": "string", "maxLength": 50 },
+        "modelo": { "type": "string", "maxLength": 50 },
+        "versao": { "type": "string", "maxLength": 50 },
+        "ano": { "type": "string", "maxLength": 10 },
+        "cor": { "type": "string", "maxLength": 30 },
+        "placa": { "type": "string", "maxLength": 20 },
+        "kmAtual": { "type": "string", "maxLength": 20 },
+        "fotoUrl": { "type": "string", "maxLength": 500 },
+        "observacoes": { "type": "string", "maxLength": 500 },
+        "createdAt": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["associadoId", "marca", "modelo", "placa"]
+    },
+    "Manutencao": {
+      "title": "Manutencao",
+      "description": "Registro de manutenção do veículo",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "associadoId": { "type": "string", "maxLength": 128 },
+        "veiculoId": { "type": "string", "maxLength": 128 },
+        "data": { "type": "string", "maxLength": 20 },
+        "km": { "type": "string", "maxLength": 20 },
+        "tipoServico": { "type": "string", "maxLength": 50 },
+        "descricao": { "type": "string", "maxLength": 500 },
+        "oficina": { "type": "string", "maxLength": 100 },
+        "valor": { "type": "string", "maxLength": 20 },
+        "proximaManutencaoKm": { "type": "string", "maxLength": 20 },
+        "proximaManutencaoData": { "type": "string", "maxLength": 20 },
+        "createdAt": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["associadoId", "veiculoId", "data", "tipoServico", "valor"]
+    },
+    "Abastecimento": {
+      "title": "Abastecimento",
+      "description": "Registro de abastecimento e consumo de combustível",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "associadoId": { "type": "string", "maxLength": 128 },
+        "veiculoId": { "type": "string", "maxLength": 128 },
+        "dataHora": { "type": "string", "maxLength": 30 },
+        "km": { "type": "string", "maxLength": 20 },
+        "combustivel": { "type": "string", "enum": ["gasolina_comum", "gasolina_aditivada", "gasolina_premium", "etanol", "diesel"] },
+        "litros": { "type": "string", "maxLength": 20 },
+        "precoLitro": { "type": "string", "maxLength": 20 },
+        "valorTotal": { "type": "string", "maxLength": 20 },
+        "tanqueCheio": { "type": "string", "maxLength": 10 },
+        "posto": { "type": "string", "maxLength": 100 },
+        "cidade": { "type": "string", "maxLength": 50 },
+        "consumoKmL": { "type": "string", "maxLength": 20 },
+        "createdAt": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["associadoId", "veiculoId", "litros", "valorTotal"]
+    },
+    "Evento": {
+      "title": "Evento",
+      "description": "Passeio, moto rally, encontro ou confraternização",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "titulo": { "type": "string", "maxLength": 100 },
+        "descricao": { "type": "string", "maxLength": 1000 },
+        "data": { "type": "string", "maxLength": 20 },
+        "hora": { "type": "string", "maxLength": 20 },
+        "local": { "type": "string", "maxLength": 150 },
+        "preco": { "type": "string", "maxLength": 20 },
+        "vagasLimite": { "type": "string", "maxLength": 10 },
+        "participantesCount": { "type": "string", "maxLength": 10 },
+        "imagemUrl": { "type": "string", "maxLength": 500 },
+        "status": { "type": "string", "enum": ["agendado", "em_andamento", "concluido", "cancelado"] },
+        "createdAt": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["titulo", "data", "local"]
+    },
+    "Mensalidade": {
+      "title": "Mensalidade",
+      "description": "Controle financeiro de mensalidade do associado",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "associadoId": { "type": "string", "maxLength": 128 },
+        "nomeAssociado": { "type": "string", "maxLength": 100 },
+        "numeroAssociado": { "type": "string", "maxLength": 30 },
+        "competencia": { "type": "string", "maxLength": 20 },
+        "ano": { "type": "string", "maxLength": 10 },
+        "valor": { "type": "string", "maxLength": 20 },
+        "vencimento": { "type": "string", "maxLength": 20 },
+        "status": { "type": "string", "enum": ["pendente", "pago", "atrasado"] },
+        "dataPagamento": { "type": "string", "maxLength": 30 },
+        "formaPagamento": { "type": "string", "maxLength": 50 },
+        "comprovanteUrl": { "type": "string", "maxLength": 500 },
+        "createdAt": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["associadoId", "competencia", "valor", "vencimento", "status"]
+    },
+    "Comunicado": {
+      "title": "Comunicado",
+      "description": "Notícias e comunicados oficiais da diretoria",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "titulo": { "type": "string", "maxLength": 100 },
+        "conteudo": { "type": "string", "maxLength": 2000 },
+        "data": { "type": "string", "maxLength": 20 },
+        "prioridade": { "type": "string", "enum": ["baixa", "normal", "alta", "urgente"] },
+        "autor": { "type": "string", "maxLength": 100 },
+        "fixado": { "type": "string", "maxLength": 10 },
+        "createdAt": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["titulo", "conteudo", "prioridade"]
+    },
+    "ParceiroServico": {
+      "title": "ParceiroServico",
+      "description": "Guinchos, oficinas, borracharias e prestadores de socorro",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "nome": { "type": "string", "maxLength": 100 },
+        "categoria": { "type": "string", "enum": ["guincho", "oficina", "borracharia", "hospital", "seguro", "posto", "outro"] },
+        "telefone": { "type": "string", "maxLength": 30 },
+        "whatsapp": { "type": "string", "maxLength": 30 },
+        "cidade": { "type": "string", "maxLength": 50 },
+        "estado": { "type": "string", "maxLength": 10 },
+        "endereco": { "type": "string", "maxLength": 150 },
+        "descontoAssociado": { "type": "string", "maxLength": 100 },
+        "horario24h": { "type": "string", "maxLength": 10 },
+        "observacoes": { "type": "string", "maxLength": 500 }
+      },
+      "required": ["nome", "categoria", "telefone", "cidade"]
+    },
+    "Configuracao": {
+      "title": "Configuracao",
+      "description": "Parâmetros institucionais do Moto Clube",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 50 },
+        "nomeClube": { "type": "string", "maxLength": 100 },
+        "lema": { "type": "string", "maxLength": 150 },
+        "anoFundacao": { "type": "string", "maxLength": 10 },
+        "logotipoUrl": { "type": "string", "maxLength": 500 },
+        "telefoneContato": { "type": "string", "maxLength": 30 },
+        "whatsappContato": { "type": "string", "maxLength": 30 },
+        "chavePix": { "type": "string", "maxLength": 100 },
+        "valorMensalidadePadrao": { "type": "string", "maxLength": 20 },
+        "diaVencimentoPadrao": { "type": "string", "maxLength": 5 },
+        "updatedAt": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["nomeClube"]
+    },
+    "Auditoria": {
+      "title": "Auditoria",
+      "description": "Registro imutável de operações de gestão",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "autorUid": { "type": "string", "maxLength": 128 },
+        "autorEmail": { "type": "string", "maxLength": 150 },
+        "acao": { "type": "string", "maxLength": 100 },
+        "alvo": { "type": "string", "maxLength": 100 },
+        "detalhes": { "type": "string", "maxLength": 1000 },
+        "timestamp": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["autorUid", "acao", "alvo", "timestamp"]
+    },
+    "CredencialDiretoria": {
+      "title": "CredencialDiretoria",
+      "description": "Credenciais de acesso operacional da diretoria",
+      "type": "object",
+      "properties": {
+        "login": { "type": "string", "maxLength": 50 },
+        "senha": { "type": "string", "maxLength": 100 },
+        "updatedAt": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["login", "senha"]
+    },
+    "CadastroInstitucional": {
+      "title": "CadastroInstitucional",
+      "description": "Dados da Ata de Fundação, CNPJ, Diretoria Legal e Contas Bancárias",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 50 },
+        "razaoSocial": { "type": "string", "maxLength": 150 },
+        "nomeFantasia": { "type": "string", "maxLength": 100 },
+        "cnpj": { "type": "string", "maxLength": 30 },
+        "banco": { "type": "string", "maxLength": 100 },
+        "agencia": { "type": "string", "maxLength": 30 },
+        "conta": { "type": "string", "maxLength": 30 },
+        "updatedAt": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["razaoSocial", "cnpj"]
+    },
+    "LancamentoExtrato": {
+      "title": "LancamentoExtrato",
+      "description": "Lançamentos e conciliações do extrato bancário do Moto Clube",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "data": { "type": "string", "maxLength": 30 },
+        "tipo": { "type": "string", "enum": ["credito", "debito"] },
+        "categoria": { "type": "string", "maxLength": 100 },
+        "descricao": { "type": "string", "maxLength": 500 },
+        "valor": { "type": "number" },
+        "createdAt": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["data", "tipo", "descricao", "valor"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "User" },
+      "description": "Contas de acesso e papéis de permissão do sistema"
+    },
+    "/associados/{associadoId}": {
+      "schema": { "$ref": "Associado" },
+      "description": "Cadastros individuais dos associados do clube"
+    },
+    "/credenciais_diretoria/{credId}": {
+      "schema": { "$ref": "CredencialDiretoria" },
+      "description": "Credenciais gerenciáveis da diretoria com suporte a troca de senha"
+    },
+    "/veiculos/{veiculoId}": {
+      "schema": { "$ref": "Veiculo" },
+      "description": "Veículos vinculados a associados"
+    },
+    "/manutencoes/{manutencaoId}": {
+      "schema": { "$ref": "Manutencao" },
+      "description": "Histórico de manutenções e revisões dos veículos"
+    },
+    "/abastecimentos/{abastecimentoId}": {
+      "schema": { "$ref": "Abastecimento" },
+      "description": "Histórico de combustível e autonomia dos veículos"
+    },
+    "/eventos/{eventoId}": {
+      "schema": { "$ref": "Evento" },
+      "description": "Agenda oficial de passeios e encontros do clube"
+    },
+    "/mensalidades/{mensalidadeId}": {
+      "schema": { "$ref": "Mensalidade" },
+      "description": "Controle financeiro de mensalidades e pagamentos"
+    },
+    "/comunicados/{comunicadoId}": {
+      "schema": { "$ref": "Comunicado" },
+      "description": "Mural de notícias e avisos oficiais"
+    },
+    "/prestadores_servicos/{prestadorId}": {
+      "schema": { "$ref": "ParceiroServico" },
+      "description": "Rede credenciada e serviços de socorro mecânico/médico"
+    },
+    "/configuracoes/{configId}": {
+      "schema": { "$ref": "Configuracao" },
+      "description": "Identidade visual e parâmetros globais do clube"
+    },
+    "/auditoria/{auditoriaId}": {
+      "schema": { "$ref": "Auditoria" },
+      "description": "Trilha de auditoria das ações administrativas"
+    },
+    "/cadastro_institucional/{docId}": {
+      "schema": { "$ref": "CadastroInstitucional" },
+      "description": "Dados da Ata e Diretoria Legal do Moto Clube"
+    },
+    "/extrato_bancario/{docId}": {
+      "schema": { "$ref": "LancamentoExtrato" },
+      "description": "Lançamentos e movimentações do extrato da conta bancária"
+    }
+  }
+}

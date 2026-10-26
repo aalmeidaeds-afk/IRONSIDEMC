@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --app-font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --app-font-size-scale: 100%;
+  }
+
+  body {
+    font-family: var(--app-font-family);
+    font-size: var(--app-font-size-scale);
+    background-color: #09090b;
+    color: #f4f4f5;
+  }
+
+  h1, h2, h3, .font-heading {
+    font-family: var(--app-font-family);
+  }
+
+  .font-club {
+    font-family: var(--app-font-family);
+  }
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #18181b;
+}
+::-webkit-scrollbar-thumb {
+  background: #3f3f46;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #d97706;
+}
+
+/* Card shimmer and metallic texture */
+.leather-card {
+  background: radial-gradient(circle at 50% 0%, rgba(39, 39, 42, 0.9) 0%, rgba(18, 18, 20, 0.98) 100%);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7);
+}
+
+.gold-gradient-text {
+  background: linear-gradient(135deg, #fef08a 0%, #f59e0b 50%, #b45309 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Modo Noturno Tático (OLED Ultra-Dark com proteção para visão noturna do motociclista) */
+.theme-noturno-tatico body {
+  background-color: #030303 !important;
+  filter: contrast(1.05) brightness(0.92);
+}
+.theme-noturno-tatico .bg-zinc-900,
+.theme-noturno-tatico .bg-zinc-900\/90,
+.theme-noturno-tatico .bg-zinc-900\/80 {
+  background-color: #070708 !important;
+}
+.theme-noturno-tatico .border-zinc-800 {
+  border-color: #27272a !important;
+}
+
+/* Modo Solar Alto Contraste (Legibilidade reforçada sob sol forte na rodovia) */
+.theme-solar-alto-contraste body {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  font-weight: 500;
+}
+.theme-solar-alto-contraste .text-zinc-400,
+.theme-solar-alto-contraste .text-zinc-500 {
+  color: #e4e4e7 !important;
+}
+.theme-solar-alto-contraste .bg-zinc-900,
+.theme-solar-alto-contraste .bg-zinc-900\/90,
+.theme-solar-alto-contraste .bg-zinc-900\/80 {
+  background-color: #09090b !important;
+  border-color: #f59e0b !important;
+}
+.theme-solar-alto-contraste .border-zinc-800,
+.theme-solar-alto-contraste .border-zinc-700 {
+  border-color: rgba(245, 158, 11, 0.4) !important;
+}
+
